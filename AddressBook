@@ -1,0 +1,213 @@
+Last login: Tue Oct 27 15:37:57 on ttys000
+You have new mail.
+swapnaneels-MacBook-Air:~ swapnaneelbhuiya$ /usr/local/mysql/bin/mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database Address Book Service
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Book Service' at line 1
+mysql> create database AddressBookService
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use AddressBookService
+Database changed
+mysql> create table AddressBook
+    -> (
+    -> first_name varchar(15) not null,
+    -> last_name varchar(15) not null,
+    -> address varchar(50) not null,
+    -> city varchar(15) not null,
+    -> state varchar(15) not null,
+    -> zip int unsigned not null,
+    -> phone number int unsigned not null,
+    -> email varchar(30) not null
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'number int unsigned not null,
+email varchar(30) not null
+)' at line 9
+mysql> create table AddressBook
+    -> (
+    -> first_name varchar(15) not null,
+    -> last_name varchar(15) not null,
+    -> address varchar(50) not null,
+    -> city varchar(15) not null,
+    -> state varchar(15) not null,
+    -> zip int unsigned not null,
+    -> phone_number int unsigned not null,
+    -> email varchar(30) not null
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> describe AddressBook;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| first_name   | varchar(15)  | NO   |     | NULL    |       |
+| last_name    | varchar(15)  | NO   |     | NULL    |       |
+| address      | varchar(50)  | NO   |     | NULL    |       |
+| city         | varchar(15)  | NO   |     | NULL    |       |
+| state        | varchar(15)  | NO   |     | NULL    |       |
+| zip          | int unsigned | NO   |     | NULL    |       |
+| phone_number | int unsigned | NO   |     | NULL    |       |
+| email        | varchar(30)  | NO   |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into AddressBook (first_name,last_name,address,city,state,zip,phone_number,email) values
+    -> ('Rahul','Tripathi','rajend','patna','bihar', 234567,1234567895,'rahul@gmail.com'),
+    -> ('urdu','pandey','murshi','dabad','westB',809098,2313123123,'urdu@yahoo'),
+    -> ('swap','bhui','jad','kol','westB',1231231,23131231231,'swap@gmail')
+    -> ;
+ERROR 1264 (22003): Out of range value for column 'phone_number' at row 3
+mysql> insert into AddressBook (first_name,last_name,address,city,state,zip,phone_number,email) values
+    -> ('Rahul','Tripathi','rajend','patna','bihar', 234567,12345675,'rahul@gmail.com'),
+    -> ('urdu','pandey','murshi','dabad','westB',809098,23131233,'urdu@yahoo'),
+    -> ('swap','bhui','jad','kol','westB',1231231,23131231,'swap@gmail')
+    -> ;
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> describe AddressBook
+    -> ;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| first_name   | varchar(15)  | NO   |     | NULL    |       |
+| last_name    | varchar(15)  | NO   |     | NULL    |       |
+| address      | varchar(50)  | NO   |     | NULL    |       |
+| city         | varchar(15)  | NO   |     | NULL    |       |
+| state        | varchar(15)  | NO   |     | NULL    |       |
+| zip          | int unsigned | NO   |     | NULL    |       |
+| phone_number | int unsigned | NO   |     | NULL    |       |
+| email        | varchar(30)  | NO   |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select *from AddressBook
+    -> ;
++------------+-----------+---------+-------+-------+---------+--------------+-----------------+
+| first_name | last_name | address | city  | state | zip     | phone_number | email           |
++------------+-----------+---------+-------+-------+---------+--------------+-----------------+
+| Rahul      | Tripathi  | rajend  | patna | bihar |  234567 |     12345675 | rahul@gmail.com |
+| urdu       | pandey    | murshi  | dabad | westB |  809098 |     23131233 | urdu@yahoo      |
+| swap       | bhui      | jad     | kol   | westB | 1231231 |     23131231 | swap@gmail      |
++------------+-----------+---------+-------+-------+---------+--------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> mysql> update AddressBook set phone_number=7687679 where first_name='swap';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'first_name='swap'' at line 1
+mysql> update AddressBook set phone_number=7687679 where nwhere first_name='swap';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'first_name='swap'' at line 1
+mysql> update AddressBook set phone_number=7687679 where first_name='swap';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from AddressBook
+    -> ;
++------------+-----------+---------+-------+-------+---------+--------------+-----------------+
+| first_name | last_name | address | city  | state | zip     | phone_number | email           |
++------------+-----------+---------+-------+-------+---------+--------------+-----------------+
+| Rahul      | Tripathi  | rajend  | patna | bihar |  234567 |     12345675 | rahul@gmail.com |
+| urdu       | pandey    | murshi  | dabad | westB |  809098 |     23131233 | urdu@yahoo      |
+| swap       | bhui      | jad     | kol   | westB | 1231231 |      7687679 | swap@gmail      |
++------------+-----------+---------+-------+-------+---------+--------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from AddressBook where name='swap';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> delete from AddressBook where first_name='swap';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from AddressBook;
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+| first_name | last_name | address | city  | state | zip    | phone_number | email           |
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+| Rahul      | Tripathi  | rajend  | patna | bihar | 234567 |     12345675 | rahul@gmail.com |
+| urdu       | pandey    | murshi  | dabad | westB | 809098 |     23131233 | urdu@yahoo      |
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from AddressBook where city='patna' or state='westB';
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+| first_name | last_name | address | city  | state | zip    | phone_number | email           |
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+| Rahul      | Tripathi  | rajend  | patna | bihar | 234567 |     12345675 | rahul@gmail.com |
+| urdu       | pandey    | murshi  | dabad | westB | 809098 |     23131233 | urdu@yahoo      |
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select state,count(city) from AddressBook;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'addressbookservice.AddressBook.state'; this is incompatible with sql_mode=only_full_group_by
+mysql> select state,count(city) from AddressBook group by state;
++-------+-------------+
+| state | count(city) |
++-------+-------------+
+| bihar |           1 |
+| westB |           1 |
++-------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from AddressBook where city='patna' order by first_name;
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+| first_name | last_name | address | city  | state | zip    | phone_number | email           |
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+| Rahul      | Tripathi  | rajend  | patna | bihar | 234567 |     12345675 | rahul@gmail.com |
++------------+-----------+---------+-------+-------+--------+--------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> alter table AddressBook add book_name varchar(20) not null after last_name;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table AddressBook add type varchar(20) not null after book_name;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update AddressBook set book_name='Rahuls' where name ='Rahul;
+    '> ';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> update AddressBook set book_name='Rahuls' where name ='Rahul';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> update AddressBook set book_name='Rahuls' where fitst_name ='Rahul';
+ERROR 1054 (42S22): Unknown column 'fitst_name' in 'where clause'
+mysql> update AddressBook set book_name='Rahuls' where first_name ='Rahul';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update AddressBook set type='Tripathis' where first_name='Rahul';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update AddressBook set book_name='bihars' where first name='urdu';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name='urdu'' at line 1
+mysql> update AddressBook set book_name='bihars' where first_name='urdu';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update AddressBook set type='bis' where first_name='urdu';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from AddressBook
+    -> ;
++------------+-----------+-----------+-----------+---------+-------+-------+--------+--------------+-----------------+
+| first_name | last_name | book_name | type      | address | city  | state | zip    | phone_number | email           |
++------------+-----------+-----------+-----------+---------+-------+-------+--------+--------------+-----------------+
+| Rahul      | Tripathi  | Rahuls    | Tripathis | rajend  | patna | bihar | 234567 |     12345675 | rahul@gmail.com |
+| urdu       | pandey    | bihars    | bis       | murshi  | dabad | westB | 809098 |     23131233 | urdu@yahoo      |
++------------+-----------+-----------+-----------+---------+-------+-------+--------+--------------+-----------------+
+2 rows in set (0.01 sec)
+
+mysql> 
